@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+
+namespace AgendaPersonal
+{
+    // Clase para manejar contactos
+    // Métodos: agregar, mostrar, buscar, eliminar
+    public class Contactes
+    {
+        private List<string> contactos = new List<string>();
+
+        public void AgregarContacto(string nombre)
+        {
+            if (!contactos.Contains(nombre))
+            {
+                contactos.Add(nombre);
+                Console.WriteLine("Agregado: " + nombre);
+            }
+            else
+            {
+                Console.WriteLine("Ya existe.");
+            }
+        }
+
+        public void MostrarContactos()
+        {
+            Console.WriteLine("Contactos:");
+            foreach (string c in contactos)
+            {
+                Console.WriteLine(c);
+            }
+        }
+
+        public bool BuscarContacto(string nombre)
+        {
+            return contactos.Contains(nombre);
+        }
+
+        public void EliminarContacto(string nombre)
+        {
+            if (contactos.Remove(nombre))
+            {
+                Console.WriteLine("Eliminado: " + nombre);
+            }
+            else
+            {
+                Console.WriteLine("No encontrado.");
+            }
+        }
+    }
+}
