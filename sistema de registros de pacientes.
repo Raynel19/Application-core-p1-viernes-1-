@@ -1,0 +1,118 @@
+using System;
+using System.Collections.Generic;
+
+namespace RegistroPacientes
+{
+    class Paciente
+    {
+        // Propiedades básicas
+        public string Nombre { get; set; }
+        public int Edad { get; set; }
+        public string Cedula { get; set; }
+        public string Diagnostico { get; set; }
+
+        // Constructor
+        public Paciente(string nombre, int edad, string cedula, string diagnostico)
+        {
+            Nombre = nombre;
+            Edad = edad;
+            Cedula = cedula;
+            Diagnostico = diagnostico;
+        }
+
+        // Mostrar datos
+        public void Mostrar()
+        {
+            Console.WriteLine("Nombre: " + Nombre);
+            Console.WriteLine("Edad: " + Edad);
+            Console.WriteLine("Cédula: " + Cedula);
+            Console.WriteLine("Diagnóstico: " + Diagnostico);
+            Console.WriteLine("---------------------------");
+        }
+    }
+
+    class Program
+    {
+        static List<Paciente> listaPacientes = new List<Paciente>();
+
+        static void Main(string[] args)
+        {
+            int opcion = 0;
+
+            while (opcion != 4)
+            {
+                Console.WriteLine("\n--- Sistema de Pacientes ---");
+                Console.WriteLine("1. Agregar paciente");
+                Console.WriteLine("2. Ver pacientes");
+                Console.WriteLine("3. Buscar paciente");
+                Console.WriteLine("4. Salir");
+                Console.Write("Opción: ");
+
+                opcion = Convert.ToInt32(Console.ReadLine());
+
+                if (opcion == 1)
+                {
+                    Agregar();
+                }
+                else if (opcion == 2)
+                {
+                    MostrarTodos();
+                }
+                else if (opcion == 3)
+                {
+                    Buscar();
+                }
+            }
+        }
+
+        static void Agregar()
+        {
+            Console.Write("Nombre: ");
+            string nombre = Console.ReadLine();
+
+            Console.Write("Edad: ");
+            int edad = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Cédula: ");
+            string cedula = Console.ReadLine();
+
+            Console.Write("Diagnóstico: ");
+            string diag = Console.ReadLine();
+
+            listaPacientes.Add(new Paciente(nombre, edad, cedula, diag));
+
+            Console.WriteLine("Paciente agregado.");
+        }
+
+        static void MostrarTodos()
+        {
+            if (listaPacientes.Count == 0)
+            {
+                Console.WriteLine("No hay pacientes.");
+                return;
+            }
+
+            foreach (Paciente p in listaPacientes)
+            {
+                p.Mostrar();
+            }
+        }
+
+        static void Buscar()
+        {
+            Console.Write("Ingrese cédula: ");
+            string cedula = Console.ReadLine();
+
+            foreach (Paciente p in listaPacientes)
+            {
+                if (p.Cedula == cedula)
+                {
+                    p.Mostrar();
+                    return;
+                }
+            }
+
+            Console.WriteLine("No encontrado.");
+        }
+    }
+}
